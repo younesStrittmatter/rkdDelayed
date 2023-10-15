@@ -101,6 +101,12 @@
                 pretty_name: 'Correct key for color',
                 default: '',
                 description: 'Correct key for motion'
+            },
+            prompt: {
+                type: jspsych.ParameterType.STRING,
+                pretty_name: 'Prompt',
+                default: '',
+                description: 'prompt'
             }
         }
     }
@@ -114,6 +120,20 @@
             // Create a canvas if it doesn't exist
             let canvas = document.createElement('canvas');
             display_element.appendChild(canvas);
+            let prompt = document.createElement('div');
+            prompt.innerHTML = trial.prompt
+            display_element.appendChild(prompt)
+
+// Apply styles to position it at the top of the screen
+            prompt.style.position = 'fixed';  // Position it fixed
+            prompt.style.top = '0';           // 0px from the top
+            prompt.style.left = '0';          // 0px from the left
+            prompt.style.width = '100%';      // Full width
+            prompt.style.padding = '10px';    // Some padding
+
+            prompt.style.textAlign = 'center';// Center the text
+
+
             let ctx = canvas.getContext('2d');
             canvas.width = 600
             canvas.height = 600
@@ -171,8 +191,8 @@
                     let dy = Math.random() * 2 - 1
                     let vel = normalizedVector(dx, dy, trial.dot_speed)
                     // Override direction for 40% of the dots
-                    dot.dx = vel.x + (Math.random() * - 1) * trial.dot_speed / 10
-                    dot.dy = vel.y + (Math.random() * - 1) * trial.dot_speed / 10
+                    dot.dx = vel.x + (Math.random() * -1) * trial.dot_speed / 10
+                    dot.dy = vel.y + (Math.random() * -1) * trial.dot_speed / 10
                     dots.push(dot);
                 }
 
@@ -181,10 +201,10 @@
                     shuffleArray(dots)
                     for (let i = 0; i < trial.num_dots * trial.motion_coherence / 100; i++) {
                         if (trial.motion_direction === 'up') {
-                            dots[i].dy = -trial.dot_speed + (Math.random() * - 1) * trial.dot_speed / 10
+                            dots[i].dy = -trial.dot_speed + (Math.random() * -1) * trial.dot_speed / 10
                             dots[i].dx = 0
                         } else {
-                            dots[i].dy = trial.dot_speed + (Math.random() * - 1) * trial.dot_speed / 10
+                            dots[i].dy = trial.dot_speed + (Math.random() * -1) * trial.dot_speed / 10
                             dots[i].dx = 0
                         }
                     }

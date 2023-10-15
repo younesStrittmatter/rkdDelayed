@@ -124,6 +124,7 @@
             // Initialize dots
             let dots = [];
             // ... (code to initialize dots)
+            let animationFrameId
 
             const updateDots = () => {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -153,7 +154,7 @@
                     }
                 }
 
-                requestAnimationFrame(updateDots);
+                animationFrameId = requestAnimationFrame(updateDots);
             }
 
             // Function to start RDK after a delay
@@ -179,7 +180,7 @@
                 setTimeout(() => {
                     shuffleArray(dots)
                     for (let i = 0; i < trial.num_dots * trial.motion_coherence / 100; i++) {
-                        if (trial.motion_direction == 'up') {
+                        if (trial.motion_direction === 'up') {
                             dots[i].dy = -trial.dot_speed
                             dots[i].dx = 0
                         } else {
@@ -203,7 +204,7 @@
 
                 // Start updating the dots for the animation frame
 
-                requestAnimationFrame(updateDots);
+                animationFrameId = requestAnimationFrame(updateDots);
             };
 
             // Optionally, hide the RDK initially until the delay is over
@@ -220,6 +221,7 @@
 
             // Function to handle responses, stopping the trial
             const after_response = (info) => {
+
                 if (info === undefined) {
                     info = {
                         key: "",
@@ -227,11 +229,14 @@
                     }
                 }
                 if (timeoutId !== undefined && timeoutId !== null) {
-
                     clearTimeout(timeoutId)
                 }
                 if (keyboardListener !== undefined && keyboardListener !== null) {
                     this.jsPsych.pluginAPI.cancelKeyboardResponse(keyboardListener);
+                }
+                if (animationFrameId !== undefined && animationFrameId !== null) {
+                    cancelAnimationFrame(animationFrameId);
+                    animationFrameId = null
                 }
                 let correct = false
                 let tooEarly = false

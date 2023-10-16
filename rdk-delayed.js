@@ -190,8 +190,8 @@
                     let dy = Math.random() * 2 - 1
                     let vel = normalizedVector(dx, dy, trial.dot_speed)
                     // Override direction for 40% of the dots
-                    dot.dx = vel.x + (Math.random() * -1) * trial.dot_speed / 10
-                    dot.dy = vel.y + (Math.random() * -1) * trial.dot_speed / 10
+                    dot.dx = vel.x + (Math.random() * 2 -1) * trial.dot_speed / 10
+                    dot.dy = vel.y + (Math.random() * 2 -1) * trial.dot_speed / 10
                     dots.push(dot);
                 }
 
@@ -200,10 +200,10 @@
                     shuffleArray(dots)
                     for (let i = 0; i < trial.num_dots * trial.motion_coherence / 100; i++) {
                         if (trial.motion_direction === 'up') {
-                            dots[i].dy = -trial.dot_speed + (Math.random() * -1) * trial.dot_speed / 10
+                            dots[i].dy = -trial.dot_speed + (Math.random() * 2 -1) * trial.dot_speed / 10
                             dots[i].dx = 0
                         } else {
-                            dots[i].dy = trial.dot_speed + (Math.random() * -1) * trial.dot_speed / 10
+                            dots[i].dy = trial.dot_speed + (Math.random() * 2 -1) * trial.dot_speed / 10
                             dots[i].dx = 0
                         }
                     }

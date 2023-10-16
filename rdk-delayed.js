@@ -107,6 +107,12 @@
                 pretty_name: 'Prompt',
                 default: '',
                 description: 'prompt'
+            },
+            aperture_size: {
+                type: jspsych.ParameterType.INT,
+                pretty_name: 'Aperture size',
+                default: 500,
+                description: 'Aperture size'
             }
         }
     }
@@ -123,20 +129,13 @@
             let prompt = document.createElement('div');
             prompt.innerHTML = trial.prompt
             display_element.appendChild(prompt)
+            // Apply styles to position it at the top of the screen
 
-// Apply styles to position it at the top of the screen
-            prompt.style.position = 'fixed';  // Position it fixed
-            prompt.style.top = '0';           // 0px from the top
-            prompt.style.left = '0';          // 0px from the left
-            prompt.style.width = '100%';      // Full width
-            prompt.style.padding = '10px';    // Some padding
-
-            prompt.style.textAlign = 'center';// Center the text
 
 
             let ctx = canvas.getContext('2d');
-            canvas.width = 600
-            canvas.height = 600
+            canvas.width = trial.aperture_size
+            canvas.height = trial.aperture_size
 
             // Define other variables such as number of dots, max radius, etc.
             // ...

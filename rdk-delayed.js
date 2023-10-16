@@ -275,10 +275,10 @@
                     }
                 }
                 let responseTask
-                if (info.key in trial.choices_color) {
+                if (trial.choices_color.includes(info.key)) {
                     responseTask = 'color'
                 }
-                if (info.key in trial.choices_motion) {
+                if (trial.choices_motion.includes(info.key)) {
                     responseTask = 'motion'
                 }
 
